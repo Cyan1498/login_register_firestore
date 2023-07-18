@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <color name="colorPrimary">#bb86fc</color>-->
+    <color name="colorPrimary">#7965FF</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorTextWhite">#ffffff</color>
+    <color name="colorWhite">#1D1D1D</color>
+    <color name="colorTextBlack">#ffffff</color>
+    <color name="colorBlack">#ffffff</color>
+    <color name="colorAccent">#03DAC5</color>
+<!--    <color name="colorEditText">#3bffffff</color>-->
+    <color name="colorEditText">#304FFE</color>
+    <color name="colorButton">#121212</color>
+    <color name="colorButtonText">#ffffff</color>
+    <color name="colorPlaceholder">#f1f1f1</color>
+    <color name="colorTextPrimary">#bb86fc</color>
+</resources>
