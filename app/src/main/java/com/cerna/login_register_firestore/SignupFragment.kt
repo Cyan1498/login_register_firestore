@@ -15,7 +15,6 @@ class SignupFragment : Fragment() {
 
     private lateinit var mFirestore: FirebaseFirestore
     private lateinit var mAuth: FirebaseAuth
-
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
 
@@ -30,6 +29,7 @@ class SignupFragment : Fragment() {
             startActivity(loginIntent)
         }
 
+
         mFirestore = FirebaseFirestore.getInstance()
         mAuth = FirebaseAuth.getInstance()
 
@@ -41,7 +41,8 @@ class SignupFragment : Fragment() {
             val passUser = binding.signupPassword.text.toString().trim()
 
             if (nameUser.isEmpty() || emailUser.isEmpty() || passUser.isEmpty()) {
-                showToast("Complete los datos")
+                //showToast("Complete los datos")
+                Helper.showToast(this,"Complete los datos")
                 //Toast.makeText(requireContext(), "Complete los datos", Toast.LENGTH_SHORT).show()
             } else {
                 registerUser(nameUser, emailUser, passUser)
@@ -67,19 +68,22 @@ class SignupFragment : Fragment() {
                         .set(map)
                         .addOnSuccessListener {
                             //Toast.makeText(requireContext(), "Usuario registrado con éxito", Toast.LENGTH_SHORT).show()
-                            showToast("Usuario registrado con éxito")
+                            //showToast("Usuario registrado con éxito")
+                            Helper.showToast(this, "Usuario registrado con éxito")
                             val intent = Intent(context, StartActivity::class.java)
                             startActivity(intent)
                             requireActivity().finish()
                         }
                         .addOnFailureListener {
-                            showToast("Error al guardar")
+                            //showToast("Error al guardar")
+                            Helper.showToast(this, "Error al guardar")
                             //Toast.makeText(requireContext(), "Error al guardar", Toast.LENGTH_SHORT).show()
 
                         }
                 }
                 else {
-                    showToast("Error al registrar")
+                    //showToast("Error al registrar")
+                    Helper.showToast(this, "Error al guardar")
                     //Toast.makeText(requireContext(), "Error al registrar", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -92,9 +96,9 @@ class SignupFragment : Fragment() {
     }
 
     // Función de extensión showToast()
-    private fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    /*private fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(requireContext(), message, duration).show()
-    }
+    }*/
 
 
 }
