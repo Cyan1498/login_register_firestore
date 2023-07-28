@@ -2,6 +2,9 @@
     <string name="app_name">login_register_firestore</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="message_login_failed">Error al loguearse</string>
+    <string name="message_login_failed">Usuario o contraseña incorrectos</string>
     <string name="message_empty_fields">Los campos estan vacios</string>
+    <string name="add_user">Añadir usuario</string>
+    <string name="update">Actualizar</string>
+    <string name="register">Registrar</string>
 </resources>

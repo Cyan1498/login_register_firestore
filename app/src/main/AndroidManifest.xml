@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Login_register_firestore"
         tools:targetApi="31">
         <activity
-            android:name=".StartActivity"
+            android:name=".view.activities.StartActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

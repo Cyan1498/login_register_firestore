@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginFragment">
+    tools:context=".view.fragments.LoginFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,6 +23,7 @@
                 android:src="@drawable/logo" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edEmailL"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
@@ -37,7 +38,7 @@
                 android:layout_gravity="center">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/login_email"
+                    android:id="@+id/edEmail"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:textColor="@color/colorEditText"
@@ -45,6 +46,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edPasswordL"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
@@ -59,7 +61,7 @@
                 android:layout_gravity="center">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/login_password"
+                    android:id="@+id/edPassword"
                     android:layout_width="match_parent"
                     android:inputType="textPassword"
                     android:layout_height="60dp"

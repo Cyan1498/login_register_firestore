@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/userListFragment">
+
+    <fragment
+        android:id="@+id/userListFragment"
+        android:name="com.cerna.login_register_firestore.view.fragments.user.UserListFragment"
+        android:label="fragment_user_list"
+        tools:layout="@layout/fragment_user_list">
+        <action
+            android:id="@+id/action_userListFragment_to_SignupFragment"
+            app:destination="@id/signupFragment" />
+        <argument
+            android:name="selectedUser"
+            app:argType="com.cerna.login_register_firestore.model.User" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.cerna.login_register_firestore.view.fragments.user.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" />
+    <!-- producto -->
+    <fragment
+        android:id="@+id/producListFragment"
+        android:name="com.cerna.login_register_firestore.view.fragments.product.ProducListFragment"
+        android:label="fragment_produc_list"
+        tools:layout="@layout/fragment_produc_list" >
+
+        <action
+            android:id="@+id/productlistfragment_productfragment"
+            app:destination="@id/productoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productoFragment"
+        android:name="com.cerna.login_register_firestore.view.fragments.product.ProductoFragment"
+        android:label="fragment_producto"
+        tools:layout="@layout/fragment_producto" />
+</navigation>

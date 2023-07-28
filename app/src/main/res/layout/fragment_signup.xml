@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SignupFragment">
+    tools:context=".view.fragments.user.SignupFragment">
 
     <LinearLayout
+        android:id="@+id/formLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/lottieLoading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Aquí colocamos el resto de los elementos del formulario -->
         <ImageView
             android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
@@ -21,8 +27,8 @@
             android:layout_gravity="center"
             android:src="@drawable/logo_signup" />
 
-
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signupNameL"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -37,15 +43,17 @@
             android:layout_gravity="center">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signup_name"
+                android:id="@+id/edName"
                 android:layout_width="match_parent"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:layout_height="60dp"
                 android:textColor="@color/colorEditText"
                 android:layout_gravity="center"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- ... Omitimos el resto de los campos del formulario para simplificar el código ... -->
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signupEmailL"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -60,7 +68,7 @@
             android:layout_gravity="center">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signup_email"
+                android:id="@+id/edEmail"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:textColor="@color/colorEditText"
@@ -70,6 +78,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signupPasswordL"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -84,7 +93,7 @@
             android:layout_gravity="center">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signup_password"
+                android:id="@+id/edPassword"
                 android:layout_width="match_parent"
                 android:inputType="textPassword"
                 android:layout_height="60dp"
@@ -101,17 +110,24 @@
             android:text="Signup"
             android:textSize="18sp"
             app:cornerRadius="10dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/loginRedirectText"
-            android:text="Already an user? Login"
-            android:layout_gravity="center"
-            android:padding="8dp"
-            android:layout_marginTop="30dp"
-            android:textSize="18sp"
-            android:textColor="@color/colorPrimary"/>
 
     </LinearLayout>
 
-</LinearLayout>
+    <!-- Agregamos la animación de carga debajo del botón de Signup -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_animation"
+        app:layout_constraintTop_toBottomOf="@+id/formLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

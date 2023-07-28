@@ -1,4 +1,4 @@
-package com.cerna.login_register_firestore
+package com.cerna.login_register_firestore.utils
 
 import android.widget.Toast
 import androidx.fragment.app.Fragment

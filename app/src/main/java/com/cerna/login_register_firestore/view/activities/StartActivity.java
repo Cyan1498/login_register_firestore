@@ -1,8 +1,10 @@
-package com.cerna.login_register_firestore;
+package com.cerna.login_register_firestore.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.cerna.login_register_firestore.R;
 
 public class StartActivity extends AppCompatActivity {
 
