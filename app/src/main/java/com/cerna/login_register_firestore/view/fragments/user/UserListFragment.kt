@@ -1,10 +1,15 @@
 package com.cerna.login_register_firestore.view.fragments.user
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AnimationUtils
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
@@ -17,6 +22,7 @@ import com.cerna.login_register_firestore.R
 import com.cerna.login_register_firestore.databinding.FragmentUserListBinding
 import com.cerna.login_register_firestore.model.User
 import com.cerna.login_register_firestore.utils.Helper
+import com.cerna.login_register_firestore.utils.anim.AnimationHelper
 import com.cerna.login_register_firestore.viewmodel.UserViewModel
 
 class UserListFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
@@ -41,10 +47,39 @@ class UserListFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
 
         observeUserData()
 
+//        binding.fabAddUser.setOnClickListener {
+//            // Ocultar el FAB
+//            binding.fabAddUser.isVisible = false
+//
+//            // Mostrar el círculo y la animación de explosión
+//            binding.circle.isVisible = true
+//            val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.circle_explosion_anim).apply {
+//                duration = 1500
+//                interpolator = AccelerateDecelerateInterpolator()
+//            }
+//            binding.circle.startAnimation(animation)
+//
+//            // Después de la animación, mostrar el formulario
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                showRegisterFragment()
+//                // Restaurar la visibilidad del FAB y ocultar el círculo
+//                binding.fabAddUser.isVisible = true
+//                binding.circle.isVisible = false
+//            }, animation.duration)
+//
+//        }
+        // Animation FAB Explosion
         binding.fabAddUser.setOnClickListener {
-            showRegisterFragment()
-
+            binding.fabAddUser.isVisible = false
+            AnimationHelper.startCircleAnimationWithDelay(
+                binding.circle,
+                this,
+                R.anim.circle_explosion_anim,
+                1500,
+                ::showRegisterFragment
+            )
         }
+
         return binding.root
     }
 
