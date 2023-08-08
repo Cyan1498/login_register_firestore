@@ -1,31 +1,24 @@
 package com.cerna.login_register_firestore.view.fragments.user
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.AnimationUtils
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.lottie.LottieAnimationView
 import com.cerna.login_register_firestore.R
 import com.cerna.login_register_firestore.databinding.FragmentUserListBinding
 import com.cerna.login_register_firestore.model.User
-import com.cerna.login_register_firestore.utils.Helper
 import com.cerna.login_register_firestore.utils.anim.AnimationHelper
+import com.cerna.login_register_firestore.view.fragments.user.adapter.OnUserItemClickListener
+import com.cerna.login_register_firestore.view.fragments.user.adapter.UserListAdapter
 import com.cerna.login_register_firestore.viewmodel.UserViewModel
 
-class UserListFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
+class UserListFragment : Fragment(), OnUserItemClickListener {
 
     private val viewModel: UserViewModel by viewModels()
     private var _binding: FragmentUserListBinding? = null
@@ -39,36 +32,14 @@ class UserListFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
     ): View {
         _binding = FragmentUserListBinding.inflate(inflater, container, false)
 
-        // Inicializar la referencia al LottieAnimationView
         loadingAnimationView = binding.lottieLoading
+        //Cargar la data al recyclerview
         setupRecyclerView()
-        // Mostrar la animación de carga
         loadingAnimationView.visibility = View.VISIBLE
-
+        //Actualizar el recycler view despues de alguna accion
         observeUserData()
 
-//        binding.fabAddUser.setOnClickListener {
-//            // Ocultar el FAB
-//            binding.fabAddUser.isVisible = false
-//
-//            // Mostrar el círculo y la animación de explosión
-//            binding.circle.isVisible = true
-//            val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.circle_explosion_anim).apply {
-//                duration = 1500
-//                interpolator = AccelerateDecelerateInterpolator()
-//            }
-//            binding.circle.startAnimation(animation)
-//
-//            // Después de la animación, mostrar el formulario
-//            Handler(Looper.getMainLooper()).postDelayed({
-//                showRegisterFragment()
-//                // Restaurar la visibilidad del FAB y ocultar el círculo
-//                binding.fabAddUser.isVisible = true
-//                binding.circle.isVisible = false
-//            }, animation.duration)
-//
-//        }
-        // Animation FAB Explosion
+        // Ir al formulario de Registro con Animation FAB Explosion
         binding.fabAddUser.setOnClickListener {
             binding.fabAddUser.isVisible = false
             AnimationHelper.startCircleAnimationWithDelay(
@@ -91,6 +62,7 @@ class UserListFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
         fragmentTransaction.commit()
     }
 
+    //Pasar datos la vista SignupFragment usando Parcelize
     private fun showEditFragment(selectedUser: User) {
         val signupFragment = SignupFragment()
 
@@ -106,20 +78,20 @@ class UserListFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
             .commit()
     }
 
-
-        private fun setupRecyclerView() {
+    //vincular el UserListAdapter con el RecyclerView, estableciendo la conexión entre los datos y la interfaz de usuario.
+    private fun setupRecyclerView() {
         userAdapter = UserListAdapter(emptyList(), this) // Empty list initially
-        binding.recyclerView.apply {
+        //recyclerView.adapter (apply optimiza, para no hacer con cada uno)
+        binding.rcView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = userAdapter
         }
     }
 
     override fun onUserItemClick(user: User) {
-        // Mostramos un Toast con los datos del usuario al hacer clic en el elemento
-        val toastMessage = "Nomb re: ${user.name}\nEmail: ${user.email}"
+        //val toastMessage = "Nomb re: ${user.name}\nEmail: ${user.email}"
         //Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show()
-        Helper.showToast(this, toastMessage)
+        showEditFragment(user)
     }
 
     private fun observeUserData() {
@@ -129,17 +101,7 @@ class UserListFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
             // y luego ocultarías la animación de carga
             loadingAnimationView.visibility = View.GONE
         }
-
-        userAdapter.itemClickListener = object : UserListAdapter.OnUserItemClickListener {
-            override fun onUserItemClick(user: User) {
-                // Aquí puedes navegar al SignupFragment y pasar los datos del usuario seleccionado
-                showEditFragment(user)
-            }
-        }
-
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

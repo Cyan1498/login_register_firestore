@@ -21,7 +21,7 @@ import com.cerna.login_register_firestore.utils.Helper
 import com.cerna.login_register_firestore.utils.SignupFormValidator
 import com.cerna.login_register_firestore.viewmodel.UserViewModel
 
-class SignupFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
+class SignupFragment : Fragment(){
 
     private val viewModel: UserViewModel by viewModels()
     private var _binding: FragmentSignupBinding? = null
@@ -51,6 +51,7 @@ class SignupFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
         val selectedUser = arguments?.getParcelable<User>("selectedUser")
         if (selectedUser != null) {
             showUserData(selectedUser)
+            Helper.showToast(this,"Edicion de Usuario")
             setButtonText(true) // Configurar el texto del botón como "Update"
         } else {
             setButtonText(false) // Configurar el texto del botón como "Register"
@@ -82,8 +83,6 @@ class SignupFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
             }
         }
 
-
-
         viewModel.signupSuccess.observe(viewLifecycleOwner) {success->
             //it representa el valor emitido por el LiveData observado.
             if (success) {
@@ -102,21 +101,7 @@ class SignupFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
         viewModel.unknownErrorEvent.observe(viewLifecycleOwner) {
             Helper.showToast(this, "Error desconocido")
         }
-        //Sin animacion
-//        viewModel.updateSuccess.observe(viewLifecycleOwner) { success ->
-//            if (success) {
-//                Helper.showToast(this, "Registro actualizado con éxito")
-//                // Aquí puedes agregar cualquier otra lógica que desees realizar después de una actualización exitosa
-//                // Por ejemplo, puedes cerrar el fragmento después de unos segundos o actualizar la lista de usuarios, etc.
-//                // Cerrar el fragmento después de 2 segundos (2000 milisegundos)
-//                Handler(Looper.getMainLooper()).postDelayed({
-//                    requireActivity().supportFragmentManager.popBackStack()
-//                }, 2000)
-//
-//                // Actualizar la lista de usuarios (asumiendo que el fragmento UserListFragment está en el back stack)
-//                requireActivity().supportFragmentManager.popBackStack("UserListFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE)
-//            }
-//        }
+
         //con animacion
         viewModel.updateSuccess.observe(viewLifecycleOwner) { success ->
             if (success) {
@@ -133,7 +118,6 @@ class SignupFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
                // requireActivity().supportFragmentManager.popBackStack("UserListFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE)
             }
         }
-
 
         return binding.root
     }
@@ -161,9 +145,9 @@ class SignupFragment : Fragment(), UserListAdapter.OnUserItemClickListener {
     }
 
     // Implementación del método de la interfaz OnUserItemClickListener para recibir el usuario seleccionado
-    override fun onUserItemClick(user: User) {
-        showUserData(user)
-    }
+//    override fun onUserItemClick(user: User) {
+//        showUserData(user)
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
